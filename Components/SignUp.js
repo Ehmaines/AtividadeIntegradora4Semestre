@@ -29,7 +29,6 @@ export default class SignUp extends React.Component {
                             style={styles.input}
                             placeholder="Email"
                             placeholderTextColor="#BFA89E"
-                            secureTextEntry={true}
                         />
                     </View>
                     <View style={styles.signUp}>
@@ -56,7 +55,6 @@ export default class SignUp extends React.Component {
                             style={styles.input}
                             placeholder="Senha"
                             placeholderTextColor="#BFA89E"
-                            secureTextEntry={true}
                         />
                     </View>
                     <View style={styles.button}>
