@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import styles from "../styles/loginStyle";
@@ -44,9 +44,9 @@ export default class Login extends React.Component {
                         </TouchableOpacity>
                         </LinearGradient>
                     </View>
-                    <View style={styles.signIn}>
-                        <Text style={styles.signInTxt}>Não tem um Usuário? </Text>
-                        <TouchableOpacity style={styles.signInBtn}><Text style={styles.signInBtnTxt}>Cadastre-se</Text></TouchableOpacity>
+                    <View style={styles.signUp}>
+                        <Text style={styles.signUpTxt}>Não tem um Usuário? </Text>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("SignUp")} style={styles.signUpBtn}><Text style={styles.signUpBtnTxt}>Cadastre-se</Text></TouchableOpacity>
                     </View>
                 </LinearGradient>
             </View>

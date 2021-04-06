@@ -18,9 +18,8 @@ const styles = StyleSheet.create({
     login: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-evenly",
+        justifyContent: "center",
         alignItems: "center",
-        width: "100%",
     },
     input: {
         width: 350,
@@ -30,13 +29,10 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderWidth: 1,
         borderColor: "#A1B5D8",
-        margin: 5,
-        marginRight: 30,
     },
     textInput: {
         color: "#9FFFF5",
         fontSize: 25,
-        width: 93,
         alignSelf: "center",
     },
     button:{
@@ -45,9 +41,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent:"center",
         marginTop: 30,
-        marginLeft: 100
     },
-    btnLogin:{
+    btnSignUp:{
         width:250,
         height: 50,
         display: "flex",
@@ -63,23 +58,17 @@ const styles = StyleSheet.create({
     signUp:{
         width:"100%",
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         marginTop: 40,
-        marginLeft:90,
     },
-    signUpTxt:{
-        fontSize:20,
-        color: "#BFA89E"
-    },
-    signUpBtnTxt: {
-        fontSize: 30,
+    backBtnTxt: {
+        fontSize: 25,
         fontWeight:"700",
         textDecorationLine: "underline",
         color:"#9FFFF5"
     }
-
 });
 
 export default styles;
