@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         color: "#BFA89E"
     },
     signUpBtnTxt: {
-        fontSize: 30,
+        fontSize: 20,
         fontWeight:"700",
         textDecorationLine: "underline",
         color:"#9FFFF5"

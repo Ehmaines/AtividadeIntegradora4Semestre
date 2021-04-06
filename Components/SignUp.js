@@ -71,7 +71,7 @@ export default class SignUp extends React.Component {
                         </LinearGradient>
                     </View>
                     <View style={styles.signUp}>
-                        <TouchableOpacity >
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
                             <Text style={styles.backBtnTxt}>Voltar</Text>
                         </TouchableOpacity>
                     </View>
