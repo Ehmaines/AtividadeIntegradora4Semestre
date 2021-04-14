@@ -2,9 +2,56 @@ import React from "react";
 import { Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import firebase from "../Firebase";
 import styles from "../styles/signUpStyle";
 
 export default class SignUp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            cpf: "",
+        };
+        this.ref = firebase.firestore().collection("usuarios");
+    }
+
+    signUp = () => {
+        let username = this.state.username;
+        let email = this.state.email;
+        let password = this.state.password;
+        let cpf = this.state.cpf;
+
+        if (this.state.password !== this.state.confirmPassword || this.state.password === undefined || this.state.confirmPassword === undefined) {
+            alert("As senhas devem ser iguais");
+            return;
+        }
+
+        this.ref
+        .doc(email)
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                alert("Usuario Já existe");
+                return;
+            }
+            this.ref.doc(email).set({
+                cpf: cpf,
+                username: username,
+                email: email,
+                password: password
+            })
+            alert("Usuário Cadastrado com sucesso!")
+            this.props.navigation.navigate("Login")
+        })
+        .catch((error) => {
+            alert("Erro:", error);
+        });
+
+    };
+
     render() {
         return (
             <View style={styles.container}>
@@ -21,6 +68,9 @@ export default class SignUp extends React.Component {
                             style={styles.input}
                             placeholder="Usuário"
                             placeholderTextColor="#BFA89E"
+                            onChangeText={(text) =>
+                                this.setState({ username: text })
+                            }
                         />
                     </View>
                     <View style={styles.signUp}>
@@ -29,6 +79,9 @@ export default class SignUp extends React.Component {
                             style={styles.input}
                             placeholder="Email"
                             placeholderTextColor="#BFA89E"
+                            onChangeText={(text) =>
+                                this.setState({ email: text })
+                            }
                         />
                     </View>
                     <View style={styles.signUp}>
@@ -38,6 +91,9 @@ export default class SignUp extends React.Component {
                             placeholder="Senha"
                             placeholderTextColor="#BFA89E"
                             secureTextEntry={true}
+                            onChangeText={(text) =>
+                                this.setState({ password: text })
+                            }
                         />
                     </View>
                     <View style={styles.signUp}>
@@ -47,14 +103,22 @@ export default class SignUp extends React.Component {
                             placeholder="Confirmar Senha"
                             placeholderTextColor="#BFA89E"
                             secureTextEntry={true}
+                            onChangeText={(text) =>
+                                this.setState({
+                                    confirmPassword: text,
+                                })
+                            }
                         />
                     </View>
                     <View style={styles.signUp}>
                         <Text style={styles.textInput}>CPF: </Text>
                         <TextInput
                             style={styles.input}
-                            placeholder="Senha"
+                            placeholder="CPF"
                             placeholderTextColor="#BFA89E"
+                            onChangeText={(text) =>
+                                this.setState({ cpf: text })
+                            }
                         />
                     </View>
                     <View style={styles.button}>
@@ -63,13 +127,22 @@ export default class SignUp extends React.Component {
                             start={{ x: 1, y: 1 }}
                             end={{ x: 0, y: 1 }}
                         >
-                            <TouchableOpacity style={styles.btnSignUp}>
+                            <TouchableOpacity
+                                style={styles.btnSignUp}
+                                onPress={() => {
+                                    this.signUp();
+                                }}
+                            >
                                 <Text style={styles.btnText}>SignUp</Text>
                             </TouchableOpacity>
                         </LinearGradient>
                     </View>
                     <View style={styles.signUp}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("Login")}>
+                        <TouchableOpacity
+                            onPress={() =>
+                                this.props.navigation.navigate("Login")
+                            }
+                        >
                             <Text style={styles.backBtnTxt}>Voltar</Text>
                         </TouchableOpacity>
                     </View>
