@@ -2,15 +2,17 @@ import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Main from "./Components/Main";
+import Menu from "./Components/Menu";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import CreatePlate from "./Components/CreatePlate";
+import Main from "./Components/Main"
 import { LogBox } from "react-native";
-const Stack = createStackNavigator();
 
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
+
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
     render() {
@@ -25,7 +27,7 @@ export default class App extends React.Component {
                     <Stack.Screen
                         name="SignUp"
                         component={SignUp}
-                        options={{ headerShown: false }}
+                        options={{ headerShown: false,  }}
                     />
                     <Stack.Screen
                         name="Main"
@@ -35,6 +37,11 @@ export default class App extends React.Component {
                     <Stack.Screen
                         name="CreatePlate"
                         component={CreatePlate}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Menu"
+                        component={Menu}
                         options={{ headerShown: false }}
                     />
                 </Stack.Navigator>

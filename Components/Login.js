@@ -75,8 +75,10 @@ export default class Login extends React.Component {
                     <View style={styles.login}>
                         <Text style={styles.textInput}>Email: </Text>
                         <TextInput
+                            keyboardType="email-address"
                             style={styles.input}
                             placeholder="Email"
+                            autoCapitalize="none"
                             placeholderTextColor="#BFA89E"
                             onChangeText={(text) => {
                                 this.setState({ email: text });

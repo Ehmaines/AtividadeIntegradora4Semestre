@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     input: {
-        width: 350,
+        width: '60%',
         fontSize: 25,
         color: "#BFA89E",
         padding: 5,
@@ -31,12 +31,11 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "#A1B5D8",
         margin: 5,
-        marginRight: 30,
     },
     textInput: {
         color: "#9FFFF5",
         fontSize: 25,
-        width: 93,
+        width: '25%',
         alignSelf: "center",
     },
     button:{
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent:"center",
         marginTop: 30,
-        marginLeft: 100
     },
     btnLogin:{
         width:250,
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 40,
-        marginLeft:90,
     },
     signUpTxt:{
         fontSize:20,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Text, View } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
-import styles from "../styles/createPlateStyle"
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import styles from "../styles/createPlateStyle";
 import firebase from "../Firebase";
 
 export default class CreatePlate extends React.Component {
@@ -9,13 +9,42 @@ export default class CreatePlate extends React.Component {
         super();
         this.state = {
             name: "",
+            priceTxt: "",
             price: 0,
             description: "",
         };
     }
 
-    adicionar() {
+    changePrice(text) {
+        let number = parseFloat(text);
+
+        if (text === "" || text == " ") return;
+
+        if (text.slice(-1) === ".") {
+        }
+        if (
+            isNaN(number) ||
+            (isNaN(parseFloat(text.slice(-1))) && text.slice(-1) !== ".")
+        ) {
+            alert("Apenas Numeros Por Favor!");
+            this.setState({ priceTxt: "" });
+            return;
+        }
+
+        this.setState({ price: number });
+        this.setState({ priceTxt: number });
+    }
+
+    addPlate() {
         var ref = firebase.firestore().collection("plates");
+        if (
+            this.state.name === "" ||
+            this.state.description === "" ||
+            this.state.price === 0
+        ) {
+            alert("Todos os campos são Obrigatórios!!");
+            return;
+        }
         ref.add({
             name: this.state.name,
             price: this.state.price,
@@ -31,7 +60,7 @@ export default class CreatePlate extends React.Component {
                 <View style={styles.InsertDataContainer}>
                     <View style={styles.InsertData}>
                         <Text style={styles.InsertDataText}>
-                            Nome do Prato;
+                            Nome do Prato:
                         </Text>
                         <TextInput
                             placeholder="Nome do Prato"
@@ -42,32 +71,50 @@ export default class CreatePlate extends React.Component {
                         />
                     </View>
                     <View style={styles.InsertData}>
+                        <Text style={styles.InsertDataText}>Preço:</Text>
+                        <TextInput
+                            value={this.state.priceTxt}
+                            onChangeText={(text) => {
+                                this.changePrice(text);
+                            }}
+                            style={styles.InsertDataTextInput}
+                            keyboardType="numeric"
+                            placeholder="Preço"
+                        />
+                    </View>
+                    <View style={styles.InsertDataDetails}>
                         <Text style={styles.InsertDataText}>Descrição:</Text>
                         <TextInput
+                            multiline={true}
+                            numberOfLines={4}
+                            textAlignVertical="top"
                             onChangeText={(text) =>
                                 this.setState({ description: text })
                             }
-                            style={styles.InsertDataTextInput}
+                            style={styles.InsertDataTextInputDetails}
                             placeholder="Descrição"
-                        />
-                    </View>
-                    <View style={styles.InsertData}>
-                        <Text style={styles.InsertDataText}>Preço:</Text>
-                        <TextInput
-                            onChangeText={(text) =>
-                                this.setState({ price: parseInt(text) })
-                            }
-                            style={styles.InsertDataTextInput}
-                            style={styles.InsertDataTextInput}
-                            placeholder="Preço"
                         />
                     </View>
                 </View>
                 <View style={styles.button}>
-                    <Button
-                        title="Salvar Prato"
-                        onPress={() => this.adicionar()}
-                    />
+                <TouchableOpacity
+                        style={styles.btnBack}
+                        color="#30292F"
+                        onPress={() => {
+                            this.addPlate()
+                        }}
+                    >
+                        <Text style={{color: "#9FFFF5", fontSize:30}}>Adicionar Prato</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonBack}>
+                    <TouchableOpacity
+                        style={styles.btnBack}
+                        color="#30292F"
+                        onPress={() => this.props.navigation.navigate("Main")}
+                    >
+                        <Text style={{color: "#9FFFF5", fontSize:20}}>Voltar</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
