@@ -7,8 +7,8 @@ import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import CreatePlate from "./Components/CreatePlate";
 import Main from "./Components/Main"
+import UpdatePlate from "./Components/UpdatePlate"
 import { LogBox } from "react-native";
-
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
@@ -42,6 +42,11 @@ export default class App extends React.Component {
                     <Stack.Screen
                         name="Menu"
                         component={Menu}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="UpdatePlate"
+                        component={UpdatePlate}
                         options={{ headerShown: false }}
                     />
                 </Stack.Navigator>

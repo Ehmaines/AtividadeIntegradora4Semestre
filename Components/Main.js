@@ -40,7 +40,7 @@ export default class Menu extends React.Component {
                                     this.props.navigation.navigate("Menu");
                                 }}
                             >
-                                <Text style={styles.btnText}>Cardapio</Text>
+                                <Text style={styles.btnText}>Cardápio</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.buttons}>
@@ -59,7 +59,7 @@ export default class Menu extends React.Component {
                             <TouchableOpacity
                                 style={styles.btn}
                                 onPress={() => {
-                                    this.props.navigation.navigate("Menu");
+                                    this.props.navigation.navigate("UpdatePlate");
                                 }}
                             >
                                 <Text style={styles.btnText}>Editar Prato</Text>
