@@ -51,7 +51,7 @@ export default class CreatePlate extends React.Component {
             description: this.state.description,
         });
         alert("Prato adicionado com sucesso!");
-        this.setState({ name: "", price: 0, description: "" });
+        this.setState({ name: "", priceTxt:"", price: 0, description: "" });
     }
 
     render() {
@@ -63,10 +63,11 @@ export default class CreatePlate extends React.Component {
                             Nome do Prato:
                         </Text>
                         <TextInput
-                            placeholder="Nome do Prato"
+                            placeholder="Prato"
                             onChangeText={(text) =>
                                 this.setState({ name: text })
                             }
+                            value={this.state.name}
                             style={styles.InsertDataTextInput}
                         />
                     </View>
@@ -93,27 +94,30 @@ export default class CreatePlate extends React.Component {
                             }
                             style={styles.InsertDataTextInputDetails}
                             placeholder="Descrição"
+                            value={this.state.description}
                         />
                     </View>
                 </View>
                 <View style={styles.button}>
-                <TouchableOpacity
+                    <TouchableOpacity
                         style={styles.btnBack}
-                        color="#30292F"
                         onPress={() => {
-                            this.addPlate()
+                            this.addPlate();
                         }}
                     >
-                        <Text style={{color: "#9FFFF5", fontSize:30}}>Adicionar Prato</Text>
+                        <Text style={{ color: "#9FFFF5", fontSize: 30 }}>
+                            Adicionar Prato
+                        </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonBack}>
                     <TouchableOpacity
                         style={styles.btnBack}
-                        color="#30292F"
                         onPress={() => this.props.navigation.navigate("Main")}
                     >
-                        <Text style={{color: "#9FFFF5", fontSize:20}}>Voltar</Text>
+                        <Text style={{ color: "#9FFFF5", fontSize: 20 }}>
+                            Voltar
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     input: {
-        width: 350,
+        width: "95%",
         fontSize: 25,
         color: "#BFA89E",
         padding: 5,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 40,
+        marginTop: 20,
     },
     backBtnTxt: {
         fontSize: 25,

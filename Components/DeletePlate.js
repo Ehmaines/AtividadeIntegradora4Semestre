@@ -1,16 +1,17 @@
 import React from "react";
-import { Text, View, FlatList } from "react-native";
+import { Button, Text, View, FlatList } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import firebase from "../Firebase";
-import styles from "../styles/updateStyles";
+import styles from "../styles/deleteStyles";
 
-export default class UpdatePlate extends React.Component {
+export default class DeletePlate extends React.Component {
     constructor() {
         super();
         this.state = {
             name: "",
             price: 0,
             description: "",
+            id: "",
             idToChange: "",
             info: [],
         };
@@ -19,10 +20,10 @@ export default class UpdatePlate extends React.Component {
     }
 
     componentDidMount() {
-        this.read();
+        this.ler();
     }
 
-    read() {
+    ler() {
         this.setState({ info: [] });
         this.ref
             .orderBy("name")
@@ -40,40 +41,18 @@ export default class UpdatePlate extends React.Component {
             });
     }
 
-    update() {
-        var newName = this.state.name;
-        var newprice = this.state.price;
-        var newDescription = this.state.description;
-        var id = this.state.idToChange;
+    delete() {
         if (id === "") {
             alert("Id Não pode estar Vazio");
             return;
         }
-        if (newName === "") {
-            alert("Por favor coloque o nome também");
-            return;
-        }
-        if (newDescription === "") {
-            alert("Por favor coloque a descrição também");
-            return;
-        }
-        if (newprice === 0) {
-            alert("Por favor coloque o Preço também");
-            return;
-        }
-        this.ref.doc(id).update({ name: newName, price: newprice, description: newDescription });
-        alert("Prato Atualizado com sucesso!");
-        this.read();
-        this.setState({ name: "", price: 0, description: "", idToChange: "" });
+        this.ref.doc(this.state.idToChange).delete();
+        alert("Prato Deletado com sucesso!");
+        this.ler();
     }
 
-    changeIdToSelected(id, name, price, description) {
-        this.setState({
-            idToChange: id,
-            name: name,
-            price: parseFloat(price),
-            description: description,
-        });
+    changeIdToSelected(id, nome, idade) {
+        this.setState({ idToChange: id, nome: nome, idade: parseInt(idade) });
     }
 
     render() {
@@ -83,54 +62,20 @@ export default class UpdatePlate extends React.Component {
                     <View style={styles.InsertData}>
                         <Text style={styles.InsertDataText}>Id:</Text>
                         <TextInput
-                            enabled={false}
                             onChangeText={(text) => this.setState({ id: text })}
                             style={styles.InsertDataTextInput}
                             value={this.state.idToChange}
                         />
                     </View>
-                    <View style={styles.InsertData}>
-                        <Text style={styles.InsertDataText}>Novo Prato:</Text>
-                        <TextInput
-                            onChangeText={(text) =>
-                                this.setState({ name: text })
-                            }
-                            value={this.state.name}
-                            style={styles.InsertDataTextInput}
-                        />
-                    </View>
-                    <View style={styles.InsertData}>
-                        <Text style={styles.InsertDataText}>Novo Preço:</Text>
-                        <TextInput
-                            onChangeText={(text) =>
-                                this.setState({ price: parseFloat(text) })
-                            }
-                            value={this.state.price.toString()}
-                            style={styles.InsertDataTextInput}
-                        />
-                    </View>
-                    <View style={styles.InsertDataDetails}>
-                        <Text style={styles.InsertDataText}>Descrição:</Text>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={4}
-                            textAlignVertical="top"
-                            placeholder="Descrição"
-                            onChangeText={(text) =>
-                                this.setState({ description: text })
-                            }
-                            value={this.state.description}
-                            style={styles.InsertDataTextInputDetails}
-                        />
-                    </View>
+                   
                 </View>
                 <View style={styles.button}>
                     <TouchableOpacity
                         style={styles.btn}
-                        onPress={() => this.update()}
+                        onPress={() => this.delete()}
                     >
                         <Text style={{ color: "#9FFFF5", fontSize: 20 }}>
-                            Atualizar Prato
+                            Deletar Prato
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -145,7 +90,7 @@ export default class UpdatePlate extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <Text style={styles.InsertDataText}>
-                    Toque no prato que quer alterar
+                    Toque no prato que quer deletar
                 </Text>
                 <FlatList
                     style={styles.ListInfo}
@@ -169,7 +114,7 @@ export default class UpdatePlate extends React.Component {
                                     Prato: <Text>{item.name}</Text>
                                 </Text>
                                 <Text style={styles.textInfoName}>
-                                    preço: <Text>{item.price}</Text>
+                                    Preço: <Text>R$ {item.price}</Text>
                                 </Text>
                                 <Text style={styles.textInfoName}>
                                     Descrição: <Text>{item.description}</Text>

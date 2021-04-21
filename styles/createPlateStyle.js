@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     InsertData: {
-        //backgroundColor:'purple',
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",

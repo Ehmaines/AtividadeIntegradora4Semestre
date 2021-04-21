@@ -69,7 +69,7 @@ export default class Menu extends React.Component {
                             <TouchableOpacity
                                 style={styles.btn}
                                 onPress={() => {
-                                    this.props.navigation.navigate("Menu");
+                                    this.props.navigation.navigate("DeletePlate");
                                 }}
                             >
                                 <Text style={styles.btnText}>Remover Prato</Text>
