@@ -42,7 +42,7 @@ export default class DeletePlate extends React.Component {
     }
 
     delete() {
-        if (id === "") {
+        if (this.state.idToChange === "") {
             alert("Id Não pode estar Vazio");
             return;
         }

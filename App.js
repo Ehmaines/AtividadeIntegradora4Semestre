@@ -9,6 +9,7 @@ import CreatePlate from "./Components/CreatePlate";
 import Main from "./Components/Main"
 import UpdatePlate from "./Components/UpdatePlate"
 import DeletePlate from "./Components/DeletePlate";
+
 import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
